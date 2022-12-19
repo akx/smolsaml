@@ -1,0 +1,36 @@
+<md:EntitiesDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+                       xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                       Name="urn:keycloak">
+    <md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+                         xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                         xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                         entityID="http://127.0.0.1:8080/auth/realms/master">
+        <md:IDPSSODescriptor WantAuthnRequestsSigned="true"
+                             protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+            <md:KeyDescriptor use="signing">
+                <ds:KeyInfo>
+                    <ds:KeyName>XsHCcBqCjCBySMFpOxOEKLZfYy-Wx3Rksy6xucgXoD0</ds:KeyName>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+                            MIICmzCCAYMCBgGFKl+K4zANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjIxMjE5MTIzMTIyWhcNMzIxMjE5MTIzMzAyWjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCIzg0vqY/41wCUC+pNcPPqStxdZAM7bd+Iw7wn/ZCtQHE2QYhCcN7xTzrdSKlQ4+6x4yK4aEVVyBMRGyVYFeIyBbqg4QPovikfOPAGc/Nf+1SuAgv9NUrlU/rL5bJOp7OopyOTYKz7Y9vXrEOfGcUnWGeVgnLyzG04wzA+AEv53RtpN86a4nSwZgVXJGUsqC5lhuX0CZjbQ/7BuW0vuXkuqi9aQXtc5vd5js3mLxOHIn+et7r06BwnO0BIntrzmRt7qzMwOW3LcJ5GKgDOBcyNUhSzfgDHB7WbLCD9a5kl0zDzVrRpk/2E15PxK97lTt4DZcxL8wWeEpJM8h1VCO0rAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAHv9Qtr4InDoquiETzZHmOnienr6XpOVnxqhb0xV9J9z/8A31YrV921hvcbUzBHRedP8h85XlR0d4sF7cUdh2XwtjWvXNdpF0owDihBLAqrp+rObO2O5rsVrib1cyEBsd+uS1T0s90g+VKiXCzKw2PkjTfy5VWSKxdBKll0O0s6Qtd/colmWxn1I93FMGgHNozOGqhUd7XYVNOT1i4yEbiZC2+r19ROuTpAsd+oK86oqT/mhJn6C9lyIaIKJWBLK0C6EBRArdRoYEuRxdPB7s1Dg87shkleGWHhRDSBXLj3yjjL9+9JTt+n90cZmbWzlwprHa9saqrmma7FNeGd0Iak=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+                </ds:KeyInfo>
+            </md:KeyDescriptor>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml"/>
+            <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml"/>
+            <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
+            <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+            <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+            <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
+            <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml"/>
+            <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml"/>
+            <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml"/>
+        </md:IDPSSODescriptor>
+    </md:EntityDescriptor>
+</md:EntitiesDescriptor>

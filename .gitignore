@@ -1,0 +1,8 @@
+*.log
+*.py[cod]
+*cache
+.coverage
+/experiment*
+coverage.xml
+htmlcov
+tests/fixtures
