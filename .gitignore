@@ -4,5 +4,6 @@
 .coverage
 /experiment*
 coverage.xml
+dist
 htmlcov
 tests/fixtures
