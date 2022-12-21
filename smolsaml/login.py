@@ -3,13 +3,9 @@ from __future__ import annotations
 import datetime
 from xml.etree.ElementTree import Element
 
-from smolsaml.consts import (
-    SAML_BINDING_POST,
-    SAML_BINDING_REDIRECT,
-    SAML_CM_BEARER,
-    SAML_NAMEID_FORMAT_UNSPECIFIED,
-)
+from smolsaml.consts import SAML_BINDING_POST, SAML_BINDING_REDIRECT, SAML_CM_BEARER
 from smolsaml.exceptions import SAMLResponseVerificationFailed
+from smolsaml.models.authn_request_configuration import AuthnRequestConfiguration
 from smolsaml.models.http import Redirect
 from smolsaml.models.idp_configuration import IDPConfiguration
 from smolsaml.models.saml_response import SAMLResponse
@@ -36,7 +32,7 @@ def initiate_login(
     idp_configuration: IDPConfiguration,
     sp_configuration: SPConfiguration,
     request_id: str,
-    subject_nameid: str | None = None,
+    authn_request_configuration: AuthnRequestConfiguration | None = None,
     relay_state: str | None = None,
 ) -> Redirect:
     sso_url = idp_configuration.get_single_signon_service_url(
@@ -47,7 +43,7 @@ def initiate_login(
         destination=sso_url,
         sp_entity_id=sp_configuration.entity_id,
         request_id=request_id,
-        subject_nameid=subject_nameid,
+        authn_request_configuration=authn_request_configuration,
     )
     parameters = get_login_query_parameters(
         authn_request_xml=authn_request_xml,
@@ -93,11 +89,10 @@ def build_authn_request_xml(
     destination: str,
     sp_entity_id: str,
     request_id: str,
-    force_authn: bool = False,
-    is_passive: bool = False,
-    subject_nameid: str | None = None,
-    subject_nameid_format: str = SAML_NAMEID_FORMAT_UNSPECIFIED,
+    authn_request_configuration: AuthnRequestConfiguration | None = None,
 ) -> Element:
+    if authn_request_configuration is None:
+        authn_request_configuration = AuthnRequestConfiguration()
     issued_at = datetime.datetime.utcnow()
 
     doc = NSElement(
@@ -110,22 +105,22 @@ def build_authn_request_xml(
             "Destination": destination,
             "ProtocolBinding": SAML_BINDING_POST,
             "AssertionConsumerServiceURL": acs_url,
-            "ForceAuthn": "true" if force_authn else None,
-            "IsPassive": "true" if is_passive else None,
+            "ForceAuthn": "true" if authn_request_configuration.force_authn else None,
+            "IsPassive": "true" if authn_request_configuration.is_passive else None,
         },
     )
     doc.append(NSElement("saml", "Issuer", text=sp_entity_id))
 
-    if subject_nameid:
+    if authn_request_configuration.subject_nameid:
         subject = NSElement("saml", "Subject")
         doc.append(subject)
         subject.append(
             NSElement(
                 "saml",
                 "NameID",
-                text=subject_nameid,
+                text=authn_request_configuration.subject_nameid,
                 attrib={
-                    "Format": subject_nameid_format,
+                    "Format": authn_request_configuration.subject_nameid_format,
                 },
             )
         )
