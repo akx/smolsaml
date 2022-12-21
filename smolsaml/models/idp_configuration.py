@@ -71,3 +71,17 @@ class IDPConfiguration:
                 yield base64.b64decode(
                     key_descriptor["ds:KeyInfo"]["ds:X509Data"]["ds:X509Certificate"]
                 )
+
+    def replace_signing_key_descriptors(self, certificate_datas: Iterable[str]):
+        key_descriptors = [kd for kd in self.key_descriptors if kd["@use"] != "signing"]
+        for certificate_data in certificate_datas:
+            key_descriptors.append(
+                {
+                    "@use": "signing",
+                    "ds:KeyInfo": {
+                        "ds:X509Data": {
+                            "ds:X509Certificate": certificate_data,
+                        },
+                    },
+                }
+            )
