@@ -2,6 +2,7 @@
 
 [![PyPI - Version](https://img.shields.io/pypi/v/smolsaml.svg)](https://pypi.org/project/smolsaml)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/smolsaml.svg)](https://pypi.org/project/smolsaml)
+![Codecov](https://img.shields.io/codecov/c/github/akx/smolsaml.svg)
 
 ---
 
