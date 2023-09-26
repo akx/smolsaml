@@ -112,19 +112,28 @@ def build_authn_request_xml(
     doc.append(NSElement("saml", "Issuer", text=sp_entity_id))
 
     if authn_request_configuration.subject_nameid:
-        subject = NSElement("saml", "Subject")
-        doc.append(subject)
-        subject.append(
-            NSElement(
-                "saml",
-                "NameID",
-                text=authn_request_configuration.subject_nameid,
-                attrib={
-                    "Format": authn_request_configuration.subject_nameid_format,
-                },
-            )
+        doc.append(_build_subject_element(authn_request_configuration))
+
+    # TODO: RequestedAuthnContext?
+
+    return doc
+
+
+def _build_subject_element(
+    authn_request_configuration: AuthnRequestConfiguration,
+) -> Element:
+    subject = NSElement("saml", "Subject")
+    subject.append(
+        NSElement(
+            "saml",
+            "NameID",
+            text=authn_request_configuration.subject_nameid,
+            attrib={
+                "Format": authn_request_configuration.subject_nameid_format,
+            },
         )
-        # TODO: is this necessary?
+    )
+    if authn_request_configuration.include_bearer_subject_confirmation:
         subject.append(
             NSElement(
                 "saml",
@@ -134,7 +143,4 @@ def build_authn_request_xml(
                 },
             )
         )
-
-    # TODO: RequestedAuthnContext?
-
-    return doc
+    return subject

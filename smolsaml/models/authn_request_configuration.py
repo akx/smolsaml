@@ -13,3 +13,4 @@ class AuthnRequestConfiguration:
     is_passive: bool = False
     subject_nameid: str | None = None
     subject_nameid_format: str = SAML_NAMEID_FORMAT_UNSPECIFIED
+    include_bearer_subject_confirmation: bool = True
