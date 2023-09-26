@@ -18,14 +18,15 @@ class SAMLResponse:
     destination: str
     id: str
     in_response_to: str | None
+    consent: str | None
     issue_instant: datetime.datetime
-    assertion: SAMLAssertion
+    assertion: SAMLAssertion | None
     issuer: SAMLNameID
     status: str
     raw_signature: Any
 
     @classmethod
-    def from_xml(cls, xml: bytes) -> SAMLResponse:
+    def from_xml(cls, xml: str | bytes) -> SAMLResponse:
         data = parse_to_dict(xml)
         response = data.pop("samlp:Response")
         assert not data  # no other elements
@@ -36,9 +37,14 @@ class SAMLResponse:
         issue_instant = from_saml_timestamp(response.pop("@IssueInstant"))
         issuer = SAMLNameID.from_xml_value(response.pop("saml:Issuer"))
         status = parse_saml_status(response.pop("samlp:Status"))
-        assertion = SAMLAssertion.from_xml_dict(response.pop("saml:Assertion"))
+        assertion_data = response.pop("saml:Assertion", None)
+        if assertion_data:
+            assertion = SAMLAssertion.from_xml_dict(assertion_data)
+        else:
+            assertion = None
         signature = response.pop("ds:Signature", None)
         response.pop("@xmlns", None)
+        consent = response.pop("@Consent", None)
         if response:
             warnings.warn(f"Unparsed response elements: {response}")
         return cls(
@@ -50,6 +56,7 @@ class SAMLResponse:
             issuer=issuer,
             status=status,
             raw_signature=signature,
+            consent=consent,
         )
 
     def check_issuer(self, issuer: str) -> bool:
