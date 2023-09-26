@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "smolsaml"
 description = ''
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 license = "MIT"
 keywords = []
 authors = [
@@ -15,7 +15,6 @@ authors = [
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
@@ -46,7 +45,7 @@ cov = "pytest --cov-report=term-missing --cov-report=xml --cov-config=pyproject.
 no-cov = "cov --no-cov {args}"
 
 [[tool.hatch.envs.test.matrix]]
-python = ["37", "38", "39", "310", "311"]
+python = ["38", "39", "310", "311"]
 
 [tool.coverage.run]
 branch = true
@@ -70,7 +69,7 @@ norecursedirs = [".git", ".tox", "dist"]
 ignore = ["D100", "D104", "D203", "D212"]
 
 [tool.ruff]
-target-version = "py37"
+target-version = "py38"
 ignore = ["SIM105"]
 line-length = 88
 select = [
