@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="_UNIQUEID" Version="2.0" IssueInstant="2023-09-26T12:33:22.111Z" Destination="https://example.com/accounts/saml/acs/" Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified" InResponseTo="s-login-OTHER_ID">
+  <Issuer xmlns="urn:oasis:names:tc:SAML:2.0:assertion">http://sso.example.com/adfs/services/trust</Issuer>
+  <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+    <ds:SignedInfo>
+      <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+      <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+      <ds:Reference URI="#_UNIQUEID">
+        <ds:Transforms>
+          <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+          <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        </ds:Transforms>
+        <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        <ds:DigestValue>...=</ds:DigestValue>
+      </ds:Reference>
+    </ds:SignedInfo>
+    <ds:SignatureValue>...</ds:SignatureValue>
+    <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <ds:X509Data>
+        <ds:X509Certificate>...</ds:X509Certificate>
+      </ds:X509Data>
+    </KeyInfo>
+  </ds:Signature>
+  <samlp:Status>
+    <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Responder"/>
+  </samlp:Status>
+</samlp:Response>

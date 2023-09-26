@@ -44,6 +44,7 @@ def test_keycloak_login_response(
         sp_configuration=example_sp_configuration,
         saml_response=keycloak_saml_response,
     )
+    assert resp.assertion
     assert (
         resp.assertion.subject
         and resp.assertion.subject.name_id == "G-580a44b3-c874-4cc5-b70e-d484cb49f9b5"
