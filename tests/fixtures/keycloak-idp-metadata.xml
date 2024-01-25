@@ -26,11 +26,11 @@
             <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
             <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
             <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
-                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml"/>
+                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml?arg=1"/>
             <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml"/>
+                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml?arg=1"/>
             <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
-                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml"/>
+                                    Location="http://127.0.0.1:8080/auth/realms/master/protocol/saml?arg=1"/>
         </md:IDPSSODescriptor>
     </md:EntityDescriptor>
 </md:EntitiesDescriptor>

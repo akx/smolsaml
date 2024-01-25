@@ -13,4 +13,5 @@ class Redirect:
     def full_url(self) -> str:
         if not self.parameters:
             return self.url
-        return f"{self.url}?{urlencode(self.parameters)}"
+        sep = "&" if "?" in self.url else "?"
+        return f"{self.url}{sep}{urlencode(self.parameters)}"

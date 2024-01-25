@@ -15,6 +15,9 @@ def test_initiate_login(
     )
     # We know this magic from the test fixtures
     assert redir.full_url.startswith(
-        "http://127.0.0.1:8080/auth/realms/master/protocol/saml"
+        "http://127.0.0.1:8080/auth/realms/master/protocol/saml?arg=1"
     )
+    assert redir.full_url.count("?") == 1
+    assert redir.full_url.count("&") >= 1
     assert "RelayState=456" in redir.full_url
+    assert "SAMLRequest=" in redir.full_url
