@@ -67,7 +67,10 @@ target-version = "py38"
 line-length = 88
 
 [tool.ruff.lint]
-ignore = ["SIM105"]
+ignore = [
+    "E501",  # Taken care of by Ruff
+    "SIM105",
+]
 select = [
     "C9",
     "E",

@@ -1,0 +1,28 @@
+<samlp:Response Version="2.0" ID="hbj8oC64PBip6qPoM9jrpS1OCfI" IssueInstant="2018-08-28T15:16:43.824Z" InResponseTo="_9a55c2b67dcd76cee19828ff496206a61b4c51237c" Destination="https://exampleapp.com/saml/login/callback" xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
+    <!-- https://stackoverflow.com/q/52062506 -->
+    <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">foobar</saml:Issuer>
+    <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:SignedInfo>
+            <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+            <ds:Reference URI="#hbj8oC64PBip6qPoM9jrpS1OCfI">
+                <ds:Transforms>
+                    <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                    <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                </ds:Transforms>
+                <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                <ds:DigestValue>...</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>...</ds:SignatureValue>
+    </ds:Signature>
+    <samlp:Status>
+        <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Responder">
+            <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:AuthnFailed"/>
+        </samlp:StatusCode>
+        <samlp:StatusMessage>Authentication Failed</samlp:StatusMessage>
+        <samlp:StatusDetail>
+            <Cause>org.sourceid.websso.profiles.idp.FailedAuthnSsoException</Cause>
+        </samlp:StatusDetail>
+    </samlp:Status>
+</samlp:Response>

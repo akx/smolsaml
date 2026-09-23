@@ -8,7 +8,7 @@ from typing import Any
 from smolsaml.consts import SAML_NAMEID_FORMAT_ENTITY
 from smolsaml.models.saml_assertion import SAMLAssertion
 from smolsaml.models.saml_name_id import SAMLNameID
-from smolsaml.models.saml_status import parse_saml_status
+from smolsaml.models.saml_status import SAMLStatus
 from smolsaml.utils.saml import from_saml_timestamp
 from smolsaml.utils.xml import parse_to_dict
 
@@ -22,7 +22,7 @@ class SAMLResponse:
     issue_instant: datetime.datetime
     assertion: SAMLAssertion | None
     issuer: SAMLNameID
-    status: str
+    status: SAMLStatus
     raw_signature: Any
 
     @classmethod
@@ -36,7 +36,7 @@ class SAMLResponse:
         in_response_to = response.pop("@InResponseTo", None)
         issue_instant = from_saml_timestamp(response.pop("@IssueInstant"))
         issuer = SAMLNameID.from_xml_value(response.pop("saml:Issuer"))
-        status = parse_saml_status(response.pop("samlp:Status"))
+        status = SAMLStatus.from_xml_value(response.pop("samlp:Status"))
         assertion_data = response.pop("saml:Assertion", None)
         if assertion_data:
             assertion = SAMLAssertion.from_xml_dict(assertion_data)
