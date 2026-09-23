@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import itertools
 import subprocess
+from collections.abc import Iterable
 from contextlib import ExitStack
 from tempfile import NamedTemporaryFile
-from typing import Iterable
 
 from smolsaml.consts import SAML_NS_ASSERTION, SAML_NS_PROTOCOL
 from smolsaml.xmlsec.exceptions import XMLSecError

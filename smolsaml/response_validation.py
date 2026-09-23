@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterable
+from collections.abc import Iterable
 
 from smolsaml.consts import SAML_SUCCESS_STATUS
 from smolsaml.models.idp_configuration import IDPConfiguration
