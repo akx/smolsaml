@@ -45,8 +45,8 @@ def get_metadata_xml() -> str:
 @app.get("/")
 def home():
     return f"""
-    Metadata URL: {app.config['IDP_METADATA_URL']}<br />
-    Metadata Path: {app.config['IDP_METADATA_PATH']}
+    Metadata URL: {app.config["IDP_METADATA_URL"]}<br />
+    Metadata Path: {app.config["IDP_METADATA_PATH"]}
     <hr />
     <a href="/login">Initiate login</a>
     """

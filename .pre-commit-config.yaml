@@ -1,26 +1,26 @@
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.5.0
+    rev: 2eeb5678de71a00c0902cbda7105d328432f72cb # frozen: v0.16.8
     hooks:
-      - id: ruff
+      - id: ruff-check
       - id: ruff-format
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.3.0
+    rev: 57b21406f092110c18776e39b0bda50d37c945c8 # frozen: v2.4.3
     hooks:
       - id: codespell
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.1
+    rev: 7ff8d35ae36a7d2b968f2f90b4c723e292e594ee # frozen: v2.3.1
     hooks:
       - id: mypy
         additional_dependencies:
           - types-requests
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # frozen: v6.0.0
     hooks:
       - id: debug-statements
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.3
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: 5c9b20b95f2bc1c4d3d929b83a96d5c96a29e752 # frozen: v3.9.8
     hooks:
       - id: prettier

@@ -35,17 +35,11 @@ Source = "https://github.com/akx/smolsaml"
 [tool.hatch.version]
 path = "smolsaml/__about__.py"
 
-[tool.hatch.envs.default]
-dependencies = [
+[dependency-groups]
+dev = [
   "pytest",
   "pytest-cov",
 ]
-[tool.hatch.envs.default.scripts]
-cov = "pytest --cov-report=term-missing --cov-report=xml --cov-config=pyproject.toml --cov=smolsaml --cov=tests {args}"
-no-cov = "cov --no-cov {args}"
-
-[[tool.hatch.envs.test.matrix]]
-python = ["38", "39", "310", "311"]
 
 [tool.coverage.run]
 branch = true
