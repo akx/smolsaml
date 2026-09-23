@@ -19,5 +19,5 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: sudo apt-get install -qy xmlsec1
-      - run: uvx hatch run cov
+      - run: uv run pytest --cov-report=term-missing --cov-report=xml --cov-config=pyproject.toml --cov=smolsaml --cov=tests
       - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
