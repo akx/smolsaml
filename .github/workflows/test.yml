@@ -14,13 +14,10 @@ jobs:
       matrix:
         python-version: ["3.8", "3.12"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
         with:
           python-version: ${{ matrix.python-version }}
-          cache: pip
-          cache-dependency-path: pyproject.toml
       - run: sudo apt-get install -qy xmlsec1
-      - run: pip install hatch
-      - run: hatch run cov
-      - uses: codecov/codecov-action@v4
+      - run: uvx hatch run cov
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
