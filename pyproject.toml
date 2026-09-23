@@ -24,7 +24,6 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-  "xmltodict~=0.13.0"
 ]
 dynamic = ["version"]
 

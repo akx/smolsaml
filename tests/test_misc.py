@@ -1,7 +1,9 @@
 import pytest
 
+from smolsaml.consts import SAML_NS_ASSERTION, SAML_NS_PROTOCOL
 from smolsaml.models.saml_response import SAMLResponse
 from smolsaml.models.saml_status import SAMLStatus
+from smolsaml.utils.xml import parse_to_dict
 from tests.conftest import fixtures_path
 
 
@@ -68,3 +70,26 @@ def test_status_message_edge_cases() -> None:
 def test_status_without_code_raises() -> None:
     with pytest.raises(ValueError, match="no StatusCode"):
         SAMLStatus.from_xml_value({"samlp:StatusMessage": "hi"})
+
+
+def test_parse_to_dict_ignores_namespace_declarations() -> None:
+    xml = (
+        f'<samlp:Response xmlns:samlp="{SAML_NS_PROTOCOL}">'
+        f'<Issuer xmlns="{SAML_NS_ASSERTION}">https://idp.example.com</Issuer>'
+        "</samlp:Response>"
+    )
+    assert parse_to_dict(xml) == {
+        "samlp:Response": {"saml:Issuer": "https://idp.example.com"},
+    }
+
+
+@pytest.mark.parametrize(
+    "xml",
+    [
+        '<!DOCTYPE a [<!ENTITY x "y">]><a>&x;</a>',
+        "<!DOCTYPE a><a/>",
+    ],
+)
+def test_parse_to_dict_rejects_dtds(xml: str) -> None:
+    with pytest.raises(ValueError, match="DTD"):
+        parse_to_dict(xml)
