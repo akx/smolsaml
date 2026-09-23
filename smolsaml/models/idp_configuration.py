@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import base64
 import dataclasses
-from typing import Iterable
+from collections.abc import Iterable
 
 from smolsaml.models.utils import listify, only_one_or_raise
 from smolsaml.utils.xml import parse_to_dict
